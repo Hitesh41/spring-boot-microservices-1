@@ -18,7 +18,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PreAuthorize("hasAuthority('Customer')")
+    @PreAuthorize("hasAnyRole('Customer')")
     @PostMapping("/placeOrder")
     public ResponseEntity<Long> placeOrder(@RequestBody OrderRequest orderRequest) {
         long orderId = orderService.placeOrder(orderRequest);
@@ -26,7 +26,7 @@ public class OrderController {
         return new ResponseEntity<>(orderId, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Admin') || hasAuthority('Customer')")
+    @PreAuthorize("hasAnyRole('Admin', 'Customer')")
     @GetMapping("/{orderId}")
     public ResponseEntity<OrderResponse> getOrderDetails(@PathVariable long orderId) {
         OrderResponse orderResponse
