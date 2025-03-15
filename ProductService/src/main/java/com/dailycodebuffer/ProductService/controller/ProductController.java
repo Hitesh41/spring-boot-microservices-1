@@ -16,14 +16,14 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PreAuthorize("hasAuthority('Admin')")
+    @PreAuthorize("hasAnyRole('Admin')")
     @PostMapping
     public ResponseEntity<Long> addProduct(@RequestBody ProductRequest productRequest) {
         long productId = productService.addProduct(productRequest);
         return new ResponseEntity<>(productId, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAuthority('Admin') || hasAuthority('Customer') || hasAuthority('SCOPE_internal')")
+    @PreAuthorize("hasAnyRole('Admin', 'Customer')")
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") long productId) {
         ProductResponse productResponse
@@ -31,6 +31,7 @@ public class ProductController {
         return new ResponseEntity<>(productResponse, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('Admin', 'Customer')")
     @PutMapping("/reduceQuantity/{id}")
     public ResponseEntity<Void> reduceQuantity(
             @PathVariable("id") long productId,

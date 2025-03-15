@@ -16,3 +16,8 @@ spring:
     name: PAYMENT-SERVICE
   config:
     import: configserver:http://localhost:9296
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-0nrrcude14pccq4i.us.auth0.com/
