@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://${DB_HOST:localhost}:3306/paymentdb
     username: root
-    password: rootroot
+    password: admin
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -20,4 +20,4 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://dev-0nrrcude14pccq4i.us.auth0.com/
+          issuer-uri: https://dev-hitesh-indian.us.auth0.com/

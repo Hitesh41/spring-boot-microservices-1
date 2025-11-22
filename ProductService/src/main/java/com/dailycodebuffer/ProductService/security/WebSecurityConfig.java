@@ -45,7 +45,7 @@ public class WebSecurityConfig {
             Collection<GrantedAuthority> authorities = defaultConverter.convert(jwt);
 
             // Extract roles from a custom claim in Auth0
-            Collection<GrantedAuthority> customAuthorities = jwt.getClaimAsStringList("https://dailycodebuffer.com/roles")
+            Collection<GrantedAuthority> customAuthorities = jwt.getClaimAsStringList("https://interviewcodebuffer.com/roles")
                     .stream()
                     .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                     .collect(Collectors.toList());

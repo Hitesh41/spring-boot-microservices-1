@@ -75,15 +75,17 @@ public class OktaOAuth2WebSecurity {
         JwtGrantedAuthoritiesConverter defaultConverter = new JwtGrantedAuthoritiesConverter();
 
         jwtConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
+            System.out.println("JWT decoded"+jwt.toString());
             Collection authorities = defaultConverter.convert(jwt);
 
             // Extract roles from a custom claim in Auth0
-            Collection customAuthorities = jwt.getClaimAsStringList("https://dailycodebuffer.com/roles")
+            Collection customAuthorities = jwt.getClaimAsStringList("https://interviewcodebuffer.com/roles")
                     .stream()
                     .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                     .collect(Collectors.toList());
 
             authorities.addAll(customAuthorities);
+            System.out.println("authorities>>>"+authorities);
             return authorities;
         });
 
